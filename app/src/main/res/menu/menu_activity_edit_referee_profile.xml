@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.nickozoulis.teamproj.ActivityEditRefereeProfile">
+
+    <item
+        android:id="@+id/saveProfileRefereeButton"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        android:icon="@mipmap/save"
+        android:title="@string/save_button"/>
+
+    <item
+        android:id="@+id/deleteProfileRefereeButton"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        android:icon="@mipmap/delete"
+        android:title="@string/delete_button"/>
+</menu>

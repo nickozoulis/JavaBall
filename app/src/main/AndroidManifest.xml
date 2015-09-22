@@ -20,6 +20,12 @@
             android:name=".ActivityRefereeProfile"
             android:label="@string/title_activity_activity_referee_profile" >
         </activity>
+        <activity
+            android:name=".ActivityEditRefereeProfile"
+            android:label="@string/title_activity_activity_edit_referee_profile" >
+        </activity>
     </application>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

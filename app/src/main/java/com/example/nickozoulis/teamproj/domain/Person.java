@@ -13,6 +13,16 @@ public class Person {
         setLastName(lastName);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Person) {
+            Person p = (Person)o;
+            if (this.getID().equals(p.getID()))
+                return true;
+        }
+        return false;
+    }
+
     public String getID() {
         return ID;
     }

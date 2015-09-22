@@ -4,6 +4,19 @@
     <string name="action_settings">Settings</string>
     <string name="refereeInfo">Referee Info</string>
     <string name="title_activity_activity_referee_profile">ActivityRefereeProfile</string>
+    <string name="editRefereeDetails">Edit</string>
+    <string name="save_button">Save</string>
+    <string name="delete_button">Delete</string>
+    <string name="refereeQualification">Qualification</string>
+    <string name="refereeHomeLocality">Home</string>
+    <string name="refereeVisitLocality">Visit</string>
+    <string name="NJB">NJB</string>
+    <string name="IJB">IJB</string>
+    <string name="North">North</string>
+    <string name="Center">Central</string>
+    <string name="South">South</string>
+
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_activity_edit_referee_profile">Edit Referee Profile</string>
 </resources>

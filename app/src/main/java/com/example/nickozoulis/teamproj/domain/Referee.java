@@ -35,6 +35,16 @@ public class Referee {
         return s;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Referee) {
+            Referee r = (Referee)o;
+            if (this.getPerson().equals(r.getPerson()))
+                return true;
+        }
+        return false;
+    }
+
     public Person getPerson() {
         return person;
     }
