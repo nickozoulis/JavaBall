@@ -6,11 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.nickozoulis.teamproj.domain.Area;
@@ -26,6 +31,7 @@ public class ActivityCreateReferee extends AppCompatActivity {
 
     private Toast toast;
     private Referee referee;
+    private String spinnerLevelSelection, spinnerMatchesSelection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,7 @@ public class ActivityCreateReferee extends AppCompatActivity {
     }
 
     /*
-        Puts some filters in both EditTexts
+        Puts some filters in both EditTexts to only allow alphabetic characters.
      */
     private void setupUI() {
         EditText editTextFirstName = (EditText)findViewById(R.id.createRefereeFirstNameEditText);
@@ -73,6 +79,24 @@ public class ActivityCreateReferee extends AppCompatActivity {
                     }
                 }
         });
+
+        String[] rangeLevel = {"0", "1", "2", "3", "4"};
+
+        Spinner spinnerLevel = (Spinner)findViewById(R.id.createRefereeSpinnerQualif);
+        ArrayAdapter<String> spinnerLevelArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, rangeLevel);
+        spinnerLevelArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLevel.setAdapter(spinnerLevelArrayAdapter);
+        spinnerLevel.setOnItemSelectedListener(new MySpinnerOnClickListener(0));
+        spinnerLevel.setSelection(0);
+
+        String[] rangeMatches = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+
+        Spinner spinnerMatches = (Spinner)findViewById(R.id.createRefereeSpinnerMatches);
+        ArrayAdapter<String> spinnerMatchesArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, rangeMatches);
+        spinnerMatchesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMatches.setAdapter(spinnerMatchesArrayAdapter);
+        spinnerMatches.setOnItemSelectedListener(new MySpinnerOnClickListener(1));
+        spinnerMatches.setSelection(0);
     }
 
     @Override
@@ -94,8 +118,6 @@ public class ActivityCreateReferee extends AppCompatActivity {
             return true;
         } else if (id == R.id.createRefereeSaveButton) {
             saveChangesAndQuit();
-        } else if (id == R.id.createRefereeDeleteButton) {
-
         }
 
         return super.onOptionsItemSelected(item);
@@ -173,6 +195,10 @@ public class ActivityCreateReferee extends AppCompatActivity {
         } else if (selected == R.id.createRefereeRadioButtonIJB) {
             referee.getQualification().setCouncil(Council.IJB);
         }
+
+        referee.getQualification().setLevel(Integer.parseInt(spinnerLevelSelection));
+
+        referee.setNumOfMatchAllocated(Integer.parseInt(spinnerMatchesSelection));
     }
 
     public void showToast(String text) {
@@ -237,6 +263,29 @@ public class ActivityCreateReferee extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    /**
+     * A custom listener for the spinners. Is needed to get the selected values.
+     */
+    public class MySpinnerOnClickListener implements AdapterView.OnItemSelectedListener {
+
+        private int spinNum = -1;
+
+        public MySpinnerOnClickListener(int i) {
+            spinNum = i;
+        }
+
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            if (spinNum == 0)
+                spinnerLevelSelection = parent.getItemAtPosition(pos).toString();
+            else if (spinNum == 1)
+                spinnerMatchesSelection = parent.getItemAtPosition(pos).toString();
+        }
+
+        public void onNothingSelected(AdapterView parent) {
+            // Do nothing.
+        }
     }
 
 }

@@ -19,9 +19,18 @@
     <string name="refereeFullName">FullName</string>
     <string name="firstName">FirstName</string>
     <string name="lastName">LastName</string>
-
+    <string name="level">level</string>
+    <string name="matches">Matches</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_activity_edit_referee_profile">Edit Referee Profile</string>
     <string name="title_activity_activity_create_referee">Create Referee</string>
+
+    <array name="qualification_range">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </array>
 </resources>

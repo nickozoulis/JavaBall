@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
@@ -26,6 +28,7 @@ public class ActivityEditRefereeProfile extends AppCompatActivity {
     private Referee referee;
     private int refereeIndex;
     private Toast toast;
+    private String spinnerLevelSelection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,19 +95,14 @@ public class ActivityEditRefereeProfile extends AppCompatActivity {
         else if (referee.getQualification().getCouncil() == Council.IJB)
             radioButtonIBJ.setChecked(true);
 
-        // Spinner
-        Spinner spinner = (Spinner)findViewById(R.id.spinnerQualifEditRefereeProfile);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> departmentsAdapther = ArrayAdapter.createFromResource(this,
-                        R.array.qualification_range,
-                        android.R.layout.simple_spinner_item);
+        String[] range = {"0", "1", "2", "3", "4"};
 
-        // Specify the layout to use when the list of choices appears
-        departmentsAdapther.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-//        spinner.setAdapter(departmentsAdapther);
-        // Set selection according referee info.
-        spinner.setSelection(1);
+        Spinner spinner = (Spinner)findViewById(R.id.spinnerQualifEditRefereeProfile);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, range); //selected item will look like a spinner set from XML
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerArrayAdapter);
+        spinner.setOnItemSelectedListener(new MySpinnerOnClickListener());
+        spinner.setSelection(referee.getQualification().getLevel());
     }
 
     @Override
@@ -199,6 +197,8 @@ public class ActivityEditRefereeProfile extends AppCompatActivity {
         } else if (selected == R.id.radioButtonIJB) {
             referee.getQualification().setCouncil(Council.IJB);
         }
+
+        referee.getQualification().setLevel(Integer.parseInt(spinnerLevelSelection));
     }
 
     public void showToast(String text) {
@@ -226,6 +226,20 @@ public class ActivityEditRefereeProfile extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    /**
+     * A custom listener for the spinners. Is needed to get the selected values.
+     */
+    public class MySpinnerOnClickListener implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            spinnerLevelSelection = parent.getItemAtPosition(pos).toString();
+        }
+
+        public void onNothingSelected(AdapterView parent) {
+            // Do nothing.
+        }
     }
 
 }

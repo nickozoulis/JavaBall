@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
@@ -61,11 +61,30 @@
                     android:id="@+id/radioButtonIJB" />
             </RadioGroup>
 
-            <Spinner
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinnerQualifEditRefereeProfile"
-                android:layout_weight="1" />
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/level"
+                    android:textAllCaps="true"
+                    android:textColor="#80816E"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinnerQualifEditRefereeProfile"
+                    android:gravity="center"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

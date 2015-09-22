@@ -10,11 +10,4 @@
         android:icon="@mipmap/save"
         android:title="@string/save_button"/>
 
-    <item
-        android:id="@+id/createRefereeDeleteButton"
-        android:orderInCategory="100"
-        app:showAsAction="ifRoom"
-        android:icon="@mipmap/delete"
-        android:title="@string/delete_button"/>
-
 </menu>

@@ -95,7 +95,14 @@ public class ActivityRefereeProfile extends AppCompatActivity {
             Intent resultIntent = new Intent();
             setResult(Activity.RESULT_OK - 1, resultIntent);
             finish();
-            finish();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent resultIntent = new Intent();
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
+    }
+    
 }
