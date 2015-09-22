@@ -13,6 +13,10 @@ public class Locality {
     private Area home;
     private Set<Area> visit;
 
+    public Locality() {
+        setVisit(new HashSet<Area>(3));
+    }
+
     public Locality(String area) {
         switch (area) {
             case "North":

@@ -15,8 +15,13 @@
     <string name="North">North</string>
     <string name="Center">Central</string>
     <string name="South">South</string>
+    <string name="createReferee">Create Referee</string>
+    <string name="refereeFullName">FullName</string>
+    <string name="firstName">FirstName</string>
+    <string name="lastName">LastName</string>
 
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_activity_edit_referee_profile">Edit Referee Profile</string>
+    <string name="title_activity_activity_create_referee">Create Referee</string>
 </resources>

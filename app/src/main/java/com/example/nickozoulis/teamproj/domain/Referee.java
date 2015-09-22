@@ -11,6 +11,16 @@ public class Referee {
     private Locality locality;
     private int numOfMatchAllocated;
 
+    /**
+     * Default Constructor
+     */
+    public Referee () {
+        setPerson(new Person());
+        setQualification(new Qualification());
+        setNumOfMatchAllocated(0);
+        setLocality(new Locality());
+    }
+
     public Referee(String line) {
         String[] info = line.split(" ");
 

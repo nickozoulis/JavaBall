@@ -8,6 +8,8 @@ public class Qualification {
     private Council council;
     private int level;
 
+    public Qualification () {}
+
     public Qualification(String string) {
         this(string.substring(0, string.length() - 1), Integer.parseInt(string.substring(string.length() - 1)));
     }

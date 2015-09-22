@@ -15,6 +15,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.example.nickozoulis.teamproj.adapters.ListAdapterReferee;
+import com.example.nickozoulis.teamproj.domain.Person;
 import com.example.nickozoulis.teamproj.domain.Referee;
 import com.example.nickozoulis.teamproj.util.threads.io.FileWriter;
 import com.example.nickozoulis.teamproj.util.threads.search.CreateSearchDatabase;
@@ -83,6 +84,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.createReferee) {
+            // Start new Activity.
+            Intent refereeProfileIntent = new Intent(mainActivity, ActivityCreateReferee.class);
+            startActivityForResult(refereeProfileIntent, MainActivity.REQUEST_CODE);
         }
 
         return super.onOptionsItemSelected(item);
@@ -260,6 +265,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
     public static Collection getReferees() {
         return referees;
+    }
+
+    public static Collection getRefereePersons() {
+        ArrayList<Referee> refs = (ArrayList<Referee>)referees;
+        Collection<Person> persons = new ArrayList<Person>(12);
+
+        for (Referee r : refs) {
+            persons.add(r.getPerson());
+        }
+
+        return persons;
     }
 
     public void setReferees(Collection referees) {

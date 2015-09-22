@@ -5,16 +5,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="#ffffff"
-    tools:context="com.example.nickozoulis.teamproj.ActivityEditRefereeProfile">
+    tools:context="com.example.nickozoulis.teamproj.ActivityCreateReferee">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="15dp" >
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,46 +29,95 @@
             android:layout_height="wrap_content"
             android:background="@drawable/back_3"
             android:gravity="center"
-            android:text="@string/refereeQualification"
+            android:text="@string/refereeFullName"
             android:textAllCaps="true"
             android:textColor="#80816E"
             android:textSize="14sp"
             android:textStyle="bold" />
 
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/firstName"
+            android:ems="10"
+            android:id="@+id/createRefereeFirstNameEditText" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/lastName"
+            android:ems="10"
+            android:id="@+id/createRefereeLastNameEditText" />
+
+
+    </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:gravity="center">
 
-            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/radioGrouQualif">
+                android:background="@drawable/back_3"
+                android:gravity="center"
+                android:text="@string/refereeQualification"
+                android:textAllCaps="true"
+                android:textColor="#80816E"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-                <RadioButton
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/NJB"
-                    android:id="@+id/radioButtonNJB" />
+                    android:paddingTop="5dp"
+                    android:orientation="horizontal"
+                    android:id="@+id/createRefereeRadioGrouQualif">
 
-                <RadioButton
-                    android:layout_width="wrap_content"
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/NJB"
+                        android:id="@+id/createRefereeRadioButtonNJB" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/IJB"
+                        android:id="@+id/createRefereeRadioButtonIJB" />
+                </RadioGroup>
+
+                <Spinner
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/IJB"
-                    android:id="@+id/radioButtonIJB" />
-            </RadioGroup>
+                    android:id="@+id/createRefereeSpinnerQualifEditRefereeProfile"
+                    android:gravity="center"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinnerQualifEditRefereeProfile"
-                android:layout_weight="1" />
         </LinearLayout>
 
-    </LinearLayout>
-
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,28 +149,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:id="@+id/radioGroupHomeLocality">
+                    android:id="@+id/createRefereeRadioGroupHomeLocality">
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/North"
-                        android:id="@+id/radioButtonHomeNorth" />
+                        android:id="@+id/createRefereeRadioButtonHomeNorth" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Center"
-                        android:id="@+id/radioButtonHomeCenter" />
+                        android:id="@+id/createRefereeRadioButtonHomeCenter" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/South"
-                        android:id="@+id/radioButtonHomeSouth" />
+                        android:id="@+id/createRefereeRadioButtonHomeSouth" />
                 </RadioGroup>
             </LinearLayout>
         </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -154,23 +207,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/North"
-                    android:id="@+id/checkboxHomeNorth" />
+                    android:id="@+id/createRefereeCheckboxHomeNorth" />
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Center"
-                    android:id="@+id/checkboxHomeCenter" />
+                    android:id="@+id/createRefereeCheckboxHomeCenter" />
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/South"
-                    android:id="@+id/checkboxHomeSouth" />
+                    android:id="@+id/createRefereeCheckboxHomeSouth" />
             </LinearLayout>
 
 
         </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
 
     </LinearLayout>
