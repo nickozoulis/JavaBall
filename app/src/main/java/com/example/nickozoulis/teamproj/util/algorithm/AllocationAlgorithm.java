@@ -8,7 +8,9 @@ import com.example.nickozoulis.teamproj.util.comparators.SuitabilityBasedReferee
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by nickozoulis on 23/09/2015.
@@ -17,43 +19,36 @@ public class AllocationAlgorithm implements Allocation {
 
     private int level;
     private Area area;
-    Collection collection;
+    private Collection collection;
 
-    public AllocationAlgorithm(int level, Area area, Collection collection) {
-        this.level = level;
-        this.area = area;
-        this.collection = collection;
-    }
+
+    public AllocationAlgorithm() {}
 
     @Override
     public Collection filter() {
-        if ((collection = filterBySuitability(collection)) != null && collection.size() >= 2) {
-            // Sort suitable referees based on a custom comparator.
-            Collections.sort((List) collection, new SuitabilityBasedRefereeComparator(area));
-            return collection;
-        }
-        else
-            return null;
+        List list = new ArrayList<>(filterBySuitability(collection));
+
+        // Sort suitable referees based on a custom comparator.
+        Collections.sort(list, new SuitabilityBasedRefereeComparator(area));
+
+        return list;
     }
 
-    public Collection filterBySuitability(Collection collection) {
-        if ((collection = filterByLevel(collection)).size() < 2) return null;
+    public Set filterBySuitability(Collection collection) {
+        Set<Referee> set = new HashSet<>();
 
-        if ((collection = filterByHomeArea(collection)).size() >= 2)
-            return collection;
-        else
-            if ((collection = filterByAdjacentAndVisitArea(collection)).size() >= 2)
-                return collection;
-            else
-                if ((collection = filterByNonAdjacentAndVisitArea(collection)).size() >= 2)
-                    return collection;
-                else
-                    return null;
+        set.addAll(filterByLevel(new HashSet(collection)));
+
+        set.addAll(filterByHomeArea(set));
+        set.addAll(filterByAdjacentAndVisitArea(set));
+        set.addAll(filterByNonAdjacentAndVisitArea(set));
+
+        return set;
     }
 
     private Collection filterByHomeArea(Collection collection) {
-        ArrayList<Referee> refs = (ArrayList<Referee>)collection;
-        ArrayList<Referee> filteredCollection = new ArrayList<Referee>();
+        Set<Referee> refs = (HashSet<Referee>)collection;
+        Set<Referee> filteredCollection = new HashSet<>();
 
         for (Referee r : refs) {
             if (area == r.getLocality().getHome()) {
@@ -65,8 +60,8 @@ public class AllocationAlgorithm implements Allocation {
     }
 
     private Collection filterByAdjacentAndVisitArea(Collection collection) {
-        ArrayList<Referee> refs = (ArrayList<Referee>)collection;
-        ArrayList<Referee> filteredCollection = new ArrayList<Referee>();
+        Set<Referee> refs = (HashSet<Referee>)collection;
+        Set<Referee> filteredCollection = new HashSet<>();
 
         for (Referee r : refs) {
             if (Locality.isAreaAdjacent(r.getLocality().getHome(), area)) {
@@ -80,8 +75,8 @@ public class AllocationAlgorithm implements Allocation {
     }
 
     private Collection filterByNonAdjacentAndVisitArea(Collection collection) {
-        ArrayList<Referee> refs = (ArrayList<Referee>)collection;
-        ArrayList<Referee> filteredCollection = new ArrayList<Referee>();
+        Set<Referee> refs = (HashSet<Referee>)collection;
+        Set<Referee> filteredCollection = new HashSet<>();
 
         for (Referee r : refs) {
             if (!Locality.isAreaAdjacent(r.getLocality().getHome(), area)) {
@@ -95,8 +90,8 @@ public class AllocationAlgorithm implements Allocation {
     }
 
     private Collection filterByLevel(Collection collection) {
-        ArrayList<Referee> refs = (ArrayList<Referee>)collection;
-        ArrayList<Referee> filteredCollection = new ArrayList<Referee>();
+        Set<Referee> refs = (HashSet<Referee>)collection;
+        Set<Referee> filteredCollection = new HashSet<>();
 
         for (Referee r : refs) {
             if (level == 1) {
@@ -113,5 +108,19 @@ public class AllocationAlgorithm implements Allocation {
         return filteredCollection;
     }
 
+    @Override
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    @Override
+    public void setArea(Area area) {
+        this.area = area;
+    }
+
+    @Override
+    public void setCollection(Collection collection) {
+        this.collection = collection;
+    }
 
 }

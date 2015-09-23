@@ -1,5 +1,7 @@
 package com.example.nickozoulis.teamproj.util.algorithm;
 
+import com.example.nickozoulis.teamproj.domain.Area;
+
 import java.util.Collection;
 
 /**
@@ -8,4 +10,8 @@ import java.util.Collection;
 public interface Allocation {
 
     public Collection filter();
+    public void setCollection(Collection collection);
+    public void setLevel(int level);
+    public void setArea(Area area);
+
 }

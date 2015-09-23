@@ -42,6 +42,8 @@ public class ActivityCreateMatch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_match);
 
+        alloc = new AllocationAlgorithm();
+        alloc.setCollection(MainActivity.getReferees());
 
         setupUI();
     }
@@ -98,7 +100,7 @@ public class ActivityCreateMatch extends AppCompatActivity {
             return;
         }
 
-
+        //TODO: Istantiate a Match and save it to MainActivity collection.
 
 
     }
@@ -146,7 +148,7 @@ public class ActivityCreateMatch extends AppCompatActivity {
                 radioGroupLevelSelection = 2;
             }
 
-            alloc = new AllocationAlgorithm(radioGroupLevelSelection ,radioGroupAreaSelection, MainActivity.getReferees());
+            alloc.setLevel(radioGroupLevelSelection);
             filterAndRefresh();
         }
     }
@@ -168,7 +170,7 @@ public class ActivityCreateMatch extends AppCompatActivity {
                 radioGroupAreaSelection = Area.SOUTH;
             }
 
-            alloc = new AllocationAlgorithm(radioGroupLevelSelection ,radioGroupAreaSelection, MainActivity.getReferees());
+            alloc.setArea(radioGroupAreaSelection);
             filterAndRefresh();
         }
     }
@@ -181,11 +183,6 @@ public class ActivityCreateMatch extends AppCompatActivity {
         }
 
         filteredCollection = alloc.filter();
-
-        if (filteredCollection != null) {
-            refreshListView(filteredCollection);
-        } else {
-            showToast("Not enough referees for a match with the specified options!");
-        }
+        refreshListView(filteredCollection);
     }
 }
