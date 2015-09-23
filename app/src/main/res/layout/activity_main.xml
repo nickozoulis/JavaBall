@@ -17,16 +17,30 @@
             android:id="@+id/refereeSearchView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:focusable="false" >
+            android:focusable="false"
+            android:queryHint="@string/type_a_name">
         </SearchView>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_3"
+        android:gravity="center"
+        android:text="@string/availableReferees"
+        android:textAllCaps="true"
+        android:textColor="#80816E"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:paddingTop="5dp"/>
 
     <ListView
         android:id="@+id/refereesListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@drawable/back" />
+        android:background="@drawable/back"
+        android:paddingTop="5dp"/>
 
 
 

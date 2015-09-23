@@ -3,12 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.nickozoulis.teamproj.activities.ActivityViewRefereeProfile">
 
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
-
     <item
         android:id="@+id/buttonEditRefereeDetails"
         android:orderInCategory="100"
+        android:icon="@mipmap/edit_profile"
         app:showAsAction="ifRoom"
         android:title="@string/editRefereeDetails"/>
 </menu>

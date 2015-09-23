@@ -3,7 +3,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="refereeInfo">Referee Info</string>
-    <string name="title_activity_activity_referee_profile">ActivityRefereeProfile</string>
+    <string name="title_activity_activity_referee_profile">Referee Profile</string>
     <string name="editRefereeDetails">Edit</string>
     <string name="save_button">Save</string>
     <string name="delete_button">Delete</string>
@@ -29,6 +29,8 @@
     <string name="senior">Senior</string>
     <string name="suitableReferees">Suitable Referees</string>
     <string name="exit">Exit</string>
+    <string name="availableReferees">Available Referees</string>
+    <string name="type_a_name">Type a name</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_activity_edit_referee_profile">Edit Referee Profile</string>

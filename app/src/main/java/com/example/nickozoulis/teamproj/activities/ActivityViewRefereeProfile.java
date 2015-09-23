@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +50,9 @@ public class ActivityViewRefereeProfile extends AppCompatActivity {
         textViewQualification.setText(referee.getQualification().toString());
         textViewHomeLocality.setText(referee.getLocality().homeToString());
         textViewVisitLocality.setText(referee.getLocality().visitToString());
+
+        RatingBar ratingBar = (RatingBar)findViewById(R.id.refereeProfileRatingBar);
+        ratingBar.setRating(referee.getQualification().getLevel());
     }
 
 
@@ -67,9 +71,7 @@ public class ActivityViewRefereeProfile extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.buttonEditRefereeDetails) {
+        if (id == R.id.buttonEditRefereeDetails) {
             // Start new Activity.
             Intent editRefereeProfileIntent = new Intent(activityRefereeProfile, ActivityEditRefereeProfile.class);
             editRefereeProfileIntent.putExtra(MainActivity.REFEREEINFO, referee.toString());

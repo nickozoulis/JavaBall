@@ -89,9 +89,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.createReferee) {
+        if (id == R.id.createReferee) {
             // Start new Activity.
             Intent refereeProfileIntent = new Intent(mainActivity, ActivityCreateReferee.class);
             startActivityForResult(refereeProfileIntent, MainActivity.REQUEST_CODE);
