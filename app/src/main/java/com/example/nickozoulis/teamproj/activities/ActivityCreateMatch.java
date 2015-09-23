@@ -148,8 +148,7 @@ public class ActivityCreateMatch extends AppCompatActivity {
                 radioGroupLevelSelection = 2;
             }
 
-            alloc.setLevel(radioGroupLevelSelection);
-            filterAndRefresh();
+            filterAndRefresh(radioGroupLevelSelection);
         }
     }
 
@@ -170,19 +169,31 @@ public class ActivityCreateMatch extends AppCompatActivity {
                 radioGroupAreaSelection = Area.SOUTH;
             }
 
-            alloc.setArea(radioGroupAreaSelection);
-            filterAndRefresh();
+            filterAndRefresh(radioGroupAreaSelection);
         }
     }
 
-    private void filterAndRefresh() {
+    private void filterAndRefresh(int level) {
+        filterAndRefresh(level, radioGroupAreaSelection);
+    }
+
+    private void filterAndRefresh(Area area) {
+        filterAndRefresh(radioGroupLevelSelection, area);
+    }
+
+    private void filterAndRefresh(int level, Area area) {
         //TODO: Make it run even if an option is not selected.
         if (radioGroupLevelSelection == -1 || radioGroupAreaSelection == null) {
             showToast("Pick a selection for area And level!");
             return;
         }
 
+        alloc.setLevel(level);
+        alloc.setArea(area);
+
+        //TODO: Make it thread to avoid UI crash
         filteredCollection = alloc.filter();
         refreshListView(filteredCollection);
     }
+
 }
