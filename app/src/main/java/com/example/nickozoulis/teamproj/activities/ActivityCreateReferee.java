@@ -80,7 +80,7 @@ public class ActivityCreateReferee extends AppCompatActivity {
                 }
         });
 
-        String[] rangeLevel = {"0", "1", "2", "3", "4"};
+        String[] rangeLevel = {"1", "2", "3", "4"};
 
         Spinner spinnerLevel = (Spinner)findViewById(R.id.createRefereeSpinnerQualif);
         ArrayAdapter<String> spinnerLevelArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, rangeLevel);

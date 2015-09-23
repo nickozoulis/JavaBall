@@ -1,5 +1,7 @@
 package com.example.nickozoulis.teamproj.util.comparators;
 
+import android.util.Log;
+
 import com.example.nickozoulis.teamproj.domain.Area;
 import com.example.nickozoulis.teamproj.domain.Locality;
 import com.example.nickozoulis.teamproj.domain.Referee;
@@ -19,32 +21,37 @@ public class SuitabilityBasedRefereeComparator implements Comparator<Referee> {
 
     @Override
     public int compare(Referee lRef, Referee rRef) {
-        int res = firstClassComparison(lRef, rRef);
+        int res = firstClassOrdering(lRef, rRef);
+        Log.i("INFO", "firstClassOrdering");
 
         if (res == 0) {
-            res = secondClassComparison(lRef, rRef);
+            res = secondClassOrdering(lRef, rRef);
+            Log.i("INFO", "SecondClassOrdering");
             if (res == 0) {
-                res = thirdClassComparison(lRef, rRef);
+                res = thirdClassOrdering(lRef, rRef);
+                Log.i("INFO", "thirdClassOrdering");
             }
         }
 
         return res;
     }
 
-    private int firstClassComparison(Referee lRef, Referee rRef) {
+    private int firstClassOrdering(Referee lRef, Referee rRef) {
         int res = compareHomeLocality(lRef, rRef);
 
         if (res == 0) return compareNumOfAllocations(lRef, rRef);
+        else if (res == -2) return 0;
         else return res;
     }
 
     private int compareHomeLocality(Referee lRef, Referee rRef) {
         if (area == lRef.getLocality().getHome() && area == rRef.getLocality().getHome()) return 0;
-        if (area != lRef.getLocality().getHome() && area != rRef.getLocality().getHome()) return 0;
         if (area == lRef.getLocality().getHome() && area != rRef.getLocality().getHome()) return -1;
         if (area != lRef.getLocality().getHome() && area == rRef.getLocality().getHome()) return 1;
 
-        throw new IllegalStateException("Comparing failed.");
+        if (area != lRef.getLocality().getHome() && area != rRef.getLocality().getHome()) return -2;
+
+        return 0;
     }
 
     private int compareNumOfAllocations(Referee lRef, Referee rRef) {
@@ -52,23 +59,26 @@ public class SuitabilityBasedRefereeComparator implements Comparator<Referee> {
         if (lRef.getNumOfMatchAllocated() < rRef.getNumOfMatchAllocated()) return -1;
         if (lRef.getNumOfMatchAllocated() == rRef.getNumOfMatchAllocated()) return 0;
 
-        throw new IllegalStateException("Comparing failed.");
+        return 0;
     }
 
-    private int secondClassComparison(Referee lRef, Referee rRef) {
+    private int secondClassOrdering(Referee lRef, Referee rRef) {
         if (Locality.isAreaAdjacent(lRef.getLocality().getHome(), area) && Locality.isAreaAdjacent(rRef.getLocality().getHome(), area)) {
+            Log.i("INFO_0", lRef.toString() + "///" + rRef.toString());
             return compareVisitLocality(lRef, rRef);
         }
 
         if (!Locality.isAreaAdjacent(lRef.getLocality().getHome(), area) && Locality.isAreaAdjacent(rRef.getLocality().getHome(), area)) {
+            Log.i("INFO_-1", lRef.toString() + "///" + rRef.toString());
             return 1;
         }
 
         if (Locality.isAreaAdjacent(lRef.getLocality().getHome(), area) && !Locality.isAreaAdjacent(rRef.getLocality().getHome(), area)) {
+            Log.i("INFO_1", lRef.toString() + "///" + rRef.toString());
             return -1;
         }
 
-        throw new IllegalStateException("Comparing failed.");
+        return 0;
     }
 
     private int compareVisitLocality(Referee lRef, Referee rRef) {
@@ -84,22 +94,19 @@ public class SuitabilityBasedRefereeComparator implements Comparator<Referee> {
             return -1;
         }
 
-        throw new IllegalStateException("Comparing failed.");
+        return 0;
     }
 
-    private int thirdClassComparison(Referee lRef, Referee rRef) {
+    private int thirdClassOrdering(Referee lRef, Referee rRef) {
         if (!Locality.isAreaAdjacent(lRef.getLocality().getHome(), area) && !Locality.isAreaAdjacent(rRef.getLocality().getHome(), area)) {
             int res = compareVisitLocality(lRef, rRef);
 
             if (res == 0) {
                 return compareNumOfAllocations(lRef, rRef);
-            } else {
-                return res;
             }
         }
 
-        throw new IllegalStateException("Comparing failed.");
+        return 0;
     }
-
 
 }
