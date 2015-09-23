@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.nickozoulis.teamproj.R;
 import com.example.nickozoulis.teamproj.adapters.ListAdapterReferee;
+import com.example.nickozoulis.teamproj.domain.Match;
 import com.example.nickozoulis.teamproj.domain.Person;
 import com.example.nickozoulis.teamproj.domain.Referee;
 import com.example.nickozoulis.teamproj.util.threads.io.FileWriter;
@@ -27,6 +28,7 @@ import com.example.nickozoulis.teamproj.util.threads.search.SearchHelper;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener,
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        matches = new ArrayList();
 
         this.mainActivity = this;
 
@@ -96,9 +100,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             // Start new Activity.
             Intent refereeProfileIntent = new Intent(mainActivity, ActivityCreateMatch.class);
             startActivityForResult(refereeProfileIntent, MainActivity.REQUEST_CODE);
+        } else if (id == R.id.exit) {
+            saveAndQuit();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveAndQuit() {
+        save();
+        finish();
+    }
+
+    private void save() {
+        // Write to file in sd card.
+        new Thread(new FileWriter(getReferees(), "RefereesOut.txt")).start();
+        new Thread(new FileWriter(getMatches(), "MatchAllocs.txt")).start();
     }
 
     private void refreshListView(Collection referees) {
@@ -305,8 +322,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 refreshListView(getReferees());
         } else if (requestCode == MainActivity.REQUEST_CODE && resultCode < RESULT_OK) {
             showToast("Referee was succesfully deleted!");
-            // Write to file in sd card.
-            new Thread(new FileWriter(getReferees())).start();
             // Refresh ListView
             refreshListView(getReferees());
         }

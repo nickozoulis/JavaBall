@@ -28,6 +28,7 @@
     <string name="junior">Junior</string>
     <string name="senior">Senior</string>
     <string name="suitableReferees">Suitable Referees</string>
+    <string name="exit">Exit</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_activity_edit_referee_profile">Edit Referee Profile</string>

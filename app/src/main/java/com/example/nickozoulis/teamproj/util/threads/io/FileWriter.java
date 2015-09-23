@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 
 /**
@@ -18,16 +19,16 @@ public class FileWriter implements Runnable {
 
     public static String ioDirectory = "/javaball";
     private File file;
-    private ArrayList<Referee> referees;
+    private Collection collection;
 
-    public FileWriter(Collection referees) {
-        this.referees = (ArrayList<Referee>)referees;
+    public FileWriter(Collection collection, String filename) {
+        this.collection = collection;
 
         File sdCard = Environment.getExternalStorageDirectory();
         File dir = new File (sdCard.getAbsolutePath() + FileWriter.ioDirectory);
         dir.mkdir();
 
-        file = new File(dir, "RefereesIn.txt");
+        file = new File(dir, filename);
     }
 
     @Override
@@ -35,8 +36,8 @@ public class FileWriter implements Runnable {
         try {
             BufferedWriter bw = new BufferedWriter(new java.io.FileWriter(file));
 
-            for (Referee r : referees) {
-                bw.write(r.toString());
+            for (Object o : collection) {
+                bw.write(o.toString());
                 bw.newLine();
             }
 

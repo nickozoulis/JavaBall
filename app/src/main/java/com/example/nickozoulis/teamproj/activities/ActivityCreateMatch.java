@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.nickozoulis.teamproj.R;
 import com.example.nickozoulis.teamproj.adapters.ListAdapterReferee;
 import com.example.nickozoulis.teamproj.domain.Area;
+import com.example.nickozoulis.teamproj.domain.Match;
 import com.example.nickozoulis.teamproj.domain.Referee;
 import com.example.nickozoulis.teamproj.util.algorithm.Allocation;
 import com.example.nickozoulis.teamproj.util.algorithm.AllocationAlgorithm;
@@ -95,14 +96,17 @@ public class ActivityCreateMatch extends AppCompatActivity {
     }
 
     private void createMatchAndQuit() {
-        if (filteredCollection.size() < 2) {
+        if (filteredCollection == null || filteredCollection.size() < 2) {
             showToast("Not enough referees for a match!");
             return;
         }
 
-        //TODO: Istantiate a Match and save it to MainActivity collection.
+        //TODO: Check if week conflict
+        Match m = new Match(spinnerWeekSelection, radioGroupLevelSelection, radioGroupAreaSelection);
+        // The to first referees are the most suitable, collection has been sorted in algorithm.
+        m.setReferees(((List)filteredCollection).subList(0,2));
 
-
+        MainActivity.getMatches().add(m);
     }
 
     public void showToast(String text) {
