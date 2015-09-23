@@ -22,14 +22,11 @@ public class SuitabilityBasedRefereeComparator implements Comparator<Referee> {
     @Override
     public int compare(Referee lRef, Referee rRef) {
         int res = firstClassOrdering(lRef, rRef);
-        Log.i("INFO", "firstClassOrdering");
 
         if (res == 0) {
             res = secondClassOrdering(lRef, rRef);
-            Log.i("INFO", "SecondClassOrdering");
             if (res == 0) {
                 res = thirdClassOrdering(lRef, rRef);
-                Log.i("INFO", "thirdClassOrdering");
             }
         }
 
@@ -64,17 +61,14 @@ public class SuitabilityBasedRefereeComparator implements Comparator<Referee> {
 
     private int secondClassOrdering(Referee lRef, Referee rRef) {
         if (Locality.isAreaAdjacent(lRef.getLocality().getHome(), area) && Locality.isAreaAdjacent(rRef.getLocality().getHome(), area)) {
-            Log.i("INFO_0", lRef.toString() + "///" + rRef.toString());
             return compareVisitLocality(lRef, rRef);
         }
 
         if (!Locality.isAreaAdjacent(lRef.getLocality().getHome(), area) && Locality.isAreaAdjacent(rRef.getLocality().getHome(), area)) {
-            Log.i("INFO_-1", lRef.toString() + "///" + rRef.toString());
             return 1;
         }
 
         if (Locality.isAreaAdjacent(lRef.getLocality().getHome(), area) && !Locality.isAreaAdjacent(rRef.getLocality().getHome(), area)) {
-            Log.i("INFO_1", lRef.toString() + "///" + rRef.toString());
             return -1;
         }
 

@@ -103,7 +103,7 @@ public class ActivityEditRefereeProfile extends AppCompatActivity {
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerArrayAdapter);
         spinner.setOnItemSelectedListener(new MySpinnerOnClickListener());
-        spinner.setSelection(referee.getQualification().getLevel());
+        spinner.setSelection(referee.getQualification().getLevel() - 1);
     }
 
     @Override
