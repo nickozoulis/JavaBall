@@ -20,7 +20,7 @@ import com.example.nickozoulis.teamproj.domain.Referee;
 import com.example.nickozoulis.teamproj.util.threads.io.FileWriter;
 import com.example.nickozoulis.teamproj.util.threads.search.CreateSearchDatabase;
 import com.example.nickozoulis.teamproj.util.threads.io.FileReader;
-import com.example.nickozoulis.teamproj.util.RefereeComparator;
+import com.example.nickozoulis.teamproj.util.comparators.IDBasedRefereeComparator;
 import com.example.nickozoulis.teamproj.util.threads.search.SearchHelper;
 
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ArrayList arrayList = (ArrayList<Referee>)referees;
 
                 // Start new Activity.
-                Intent refereeProfileIntent = new Intent(mainActivity, ActivityRefereeProfile.class);
+                Intent refereeProfileIntent = new Intent(mainActivity, ActivityViewRefereeProfile.class);
                 refereeProfileIntent.putExtra(REFEREEINFO, arrayList.get(position).toString());
                 startActivityForResult(refereeProfileIntent, MainActivity.REQUEST_CODE);
             }});
@@ -88,6 +88,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             // Start new Activity.
             Intent refereeProfileIntent = new Intent(mainActivity, ActivityCreateReferee.class);
             startActivityForResult(refereeProfileIntent, MainActivity.REQUEST_CODE);
+        } else if (id == R.id.createMatch) {
+            // Start new Activity.
+            Intent refereeProfileIntent = new Intent(mainActivity, ActivityCreateMatch.class);
+            startActivityForResult(refereeProfileIntent, MainActivity.REQUEST_CODE);
         }
 
         return super.onOptionsItemSelected(item);
@@ -95,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void refreshListView(Collection referees) {
         // Sort list first according to referees ID.
-        Collections.sort((List)referees, new RefereeComparator());
+        Collections.sort((List)referees, new IDBasedRefereeComparator());
 
         listAdapter = new ListAdapterReferee(this, R.layout.list_row, (List)referees);
         listView.setAdapter(listAdapter);
@@ -226,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             Referee refereeClicked = findRefereeByName(selectedName);
 
                             // Start new Activity.
-                            Intent refereeProfileIntent = new Intent(mainActivity, ActivityRefereeProfile.class);
+                            Intent refereeProfileIntent = new Intent(mainActivity, ActivityViewRefereeProfile.class);
                             refereeProfileIntent.putExtra(MainActivity.REFEREEINFO, refereeClicked.toString());
                             startActivityForResult(refereeProfileIntent, MainActivity.REQUEST_CODE);
                         } catch (ClassCastException e) {

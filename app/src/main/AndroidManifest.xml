@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActivityRefereeProfile"
+            android:name=".ActivityViewRefereeProfile"
             android:label="@string/title_activity_activity_referee_profile" >
         </activity>
         <activity
@@ -30,6 +30,11 @@
             android:name=".ActivityCreateReferee"
             android:label="@string/title_activity_activity_create_referee" >
         </activity>
+        <activity
+            android:name=".ActivityCreateMatch"
+            android:label="@string/title_activity_activity_create_match" >
+        </activity>
+
     </application>
 
 </manifest>

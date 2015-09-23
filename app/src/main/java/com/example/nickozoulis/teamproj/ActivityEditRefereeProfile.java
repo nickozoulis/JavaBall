@@ -231,7 +231,7 @@ public class ActivityEditRefereeProfile extends AppCompatActivity {
     /**
      * A custom listener for the spinners. Is needed to get the selected values.
      */
-    public class MySpinnerOnClickListener implements AdapterView.OnItemSelectedListener {
+    private class MySpinnerOnClickListener implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
             spinnerLevelSelection = parent.getItemAtPosition(pos).toString();

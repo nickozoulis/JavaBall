@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,7 +35,7 @@ public class ActivityCreateReferee extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ctivity_creat_referee);
+        setContentView(R.layout.activity_create_referee);
 
         referee = new Referee();
 
@@ -268,7 +267,7 @@ public class ActivityCreateReferee extends AppCompatActivity {
     /**
      * A custom listener for the spinners. Is needed to get the selected values.
      */
-    public class MySpinnerOnClickListener implements AdapterView.OnItemSelectedListener {
+    private class MySpinnerOnClickListener implements AdapterView.OnItemSelectedListener {
 
         private int spinNum = -1;
 

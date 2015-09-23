@@ -10,4 +10,11 @@
         android:orderInCategory="100"
         app:showAsAction="ifRoom"
         android:title="@string/createReferee"/>
+
+    <item
+        android:id="@+id/createMatch"
+
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        android:title="@string/createMatch"/>
 </menu>

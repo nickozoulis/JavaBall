@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.nickozoulis.teamproj.ActivityCreateMatch">
+
+
+    <item
+        android:id="@+id/createMatchButton"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        android:icon="@mipmap/save"
+        android:title="@string/save_button"/>
+</menu>

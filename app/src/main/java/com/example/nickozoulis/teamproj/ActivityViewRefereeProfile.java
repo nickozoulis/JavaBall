@@ -13,7 +13,7 @@ import com.example.nickozoulis.teamproj.domain.Referee;
 
 import java.util.ArrayList;
 
-public class ActivityRefereeProfile extends AppCompatActivity {
+public class ActivityViewRefereeProfile extends AppCompatActivity {
 
     private Toast toast;
     private Referee referee;
@@ -23,7 +23,7 @@ public class ActivityRefereeProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_referee_profile);
+        setContentView(R.layout.activity_view_referee_profile);
 
         activityRefereeProfile = this;
 
@@ -80,7 +80,7 @@ public class ActivityRefereeProfile extends AppCompatActivity {
 
     public void showToast(String text) {
         if (toast != null) toast.cancel();
-        toast = Toast.makeText(ActivityRefereeProfile.this, text, Toast.LENGTH_SHORT);
+        toast = Toast.makeText(ActivityViewRefereeProfile.this, text, Toast.LENGTH_SHORT);
         toast.show();
     }
 
