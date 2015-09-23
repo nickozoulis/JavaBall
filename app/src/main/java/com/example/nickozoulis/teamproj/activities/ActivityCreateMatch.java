@@ -1,5 +1,7 @@
 package com.example.nickozoulis.teamproj.activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -101,10 +103,25 @@ public class ActivityCreateMatch extends AppCompatActivity {
             return;
         }
 
+        createMatch();
+
+        Intent resultIntent = new Intent();
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
+    }
+
+    private void createMatch() {
         //TODO: Check if week conflict
         Match m = new Match(spinnerWeekSelection, radioGroupLevelSelection, radioGroupAreaSelection);
         // The to first referees are the most suitable, collection has been sorted in algorithm.
-        m.setReferees(((List)filteredCollection).subList(0,2));
+
+        List suitableRefs = ((List)filteredCollection).subList(0,2);
+        m.setReferees(suitableRefs);
+
+        // Increment referees' allocated matches
+        for (Referee r : (List<Referee>)suitableRefs) {
+            r.setNumOfMatchAllocated(r.getNumOfMatchAllocated() + 1);
+        }
 
         MainActivity.getMatches().add(m);
     }

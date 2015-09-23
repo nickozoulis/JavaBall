@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.example.nickozoulis.teamproj.R;
 import com.example.nickozoulis.teamproj.adapters.ListAdapterReferee;
-import com.example.nickozoulis.teamproj.domain.Match;
 import com.example.nickozoulis.teamproj.domain.Person;
 import com.example.nickozoulis.teamproj.domain.Referee;
 import com.example.nickozoulis.teamproj.util.threads.io.FileWriter;
@@ -28,7 +27,6 @@ import com.example.nickozoulis.teamproj.util.threads.search.SearchHelper;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, SearchView.OnQueryTextListener,
@@ -36,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public static final String REFEREEINFO = "REFEREEINFO";
     public static final int REQUEST_CODE = 1;
+    public static final int REQUEST_CODE_MATCH = 2;
 
     private MainActivity mainActivity;
     private Toast toast;
@@ -99,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         } else if (id == R.id.createMatch) {
             // Start new Activity.
             Intent refereeProfileIntent = new Intent(mainActivity, ActivityCreateMatch.class);
-            startActivityForResult(refereeProfileIntent, MainActivity.REQUEST_CODE);
+            startActivityForResult(refereeProfileIntent, MainActivity.REQUEST_CODE_MATCH);
         } else if (id == R.id.exit) {
             saveAndQuit();
         }
@@ -118,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         new Thread(new FileWriter(getMatches(), "MatchAllocs.txt")).start();
     }
 
-    private void refreshListView(Collection referees) {
+    private void refreshListViewOnCreate(Collection referees) {
         // Sort list first according to referees ID.
         Collections.sort((List)referees, new IDBasedRefereeComparator());
 
@@ -127,6 +126,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         listAdapter.notifyDataSetChanged();
 
         initSearchUtil();
+    }
+
+    private void refreshListView(Collection referees) {
+        // Sort list first according to referees ID.
+        Collections.sort((List)referees, new IDBasedRefereeComparator());
+
+        listAdapter = new ListAdapterReferee(this, R.layout.list_row, (List)referees);
+        listView.setAdapter(listAdapter);
+        listAdapter.notifyDataSetChanged();
     }
 
     private void initSearchUtil() {
@@ -305,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void setReferees(Collection referees) {
         this.referees = referees;
-        refreshListView(referees);
+        refreshListViewOnCreate(referees);
     }
 
     public static Collection getMatches() {
@@ -319,10 +327,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == MainActivity.REQUEST_CODE && resultCode == RESULT_OK) {
-                refreshListView(getReferees());
+                refreshListViewOnCreate(getReferees());
         } else if (requestCode == MainActivity.REQUEST_CODE && resultCode < RESULT_OK) {
             showToast("Referee was succesfully deleted!");
             // Refresh ListView
+            refreshListView(getReferees());
+        } else if (requestCode == MainActivity.REQUEST_CODE_MATCH && resultCode == RESULT_OK) {
+            showToast("Match was succesfully saved!");
             refreshListView(getReferees());
         }
     }
