@@ -1,4 +1,4 @@
-package com.example.nickozoulis.teamproj.util.threads;
+package com.example.nickozoulis.teamproj.util.threads.handlers;
 
 import com.example.nickozoulis.teamproj.MainActivity;
 

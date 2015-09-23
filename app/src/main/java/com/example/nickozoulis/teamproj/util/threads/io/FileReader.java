@@ -4,14 +4,12 @@ import android.os.Environment;
 import android.os.Handler;
 
 import com.example.nickozoulis.teamproj.MainActivity;
-import com.example.nickozoulis.teamproj.R;
 import com.example.nickozoulis.teamproj.domain.Referee;
-import com.example.nickozoulis.teamproj.util.threads.UpdateRefereeCollection;
+import com.example.nickozoulis.teamproj.util.threads.handlers.UpdateRefereeCollection;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 
