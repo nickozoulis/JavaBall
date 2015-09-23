@@ -1,4 +1,4 @@
-package com.example.nickozoulis.teamproj;
+package com.example.nickozoulis.teamproj.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.nickozoulis.teamproj.R;
 import com.example.nickozoulis.teamproj.domain.Area;
 import com.example.nickozoulis.teamproj.domain.Council;
 import com.example.nickozoulis.teamproj.domain.Person;

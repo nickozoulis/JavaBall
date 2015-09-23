@@ -97,6 +97,20 @@ public class Locality {
         return s;
     }
 
+    public static boolean isAreaAdjacent(Area home, Area area) {
+        switch (area) {
+            case NORTH:
+                if (home == Area.CENTRAL) return true;
+                else return false;
+            case SOUTH:
+                if (home == Area.CENTRAL) return true;
+                else return false;
+            default:
+                return true;
+        }
+    }
+
+
     public Area getHome() {
         return home;
     }

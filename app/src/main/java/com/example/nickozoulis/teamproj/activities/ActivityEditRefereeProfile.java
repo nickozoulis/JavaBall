@@ -1,4 +1,4 @@
-package com.example.nickozoulis.teamproj;
+package com.example.nickozoulis.teamproj.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.nickozoulis.teamproj.R;
 import com.example.nickozoulis.teamproj.domain.Area;
 import com.example.nickozoulis.teamproj.domain.Council;
 import com.example.nickozoulis.teamproj.domain.Referee;
@@ -95,7 +96,7 @@ public class ActivityEditRefereeProfile extends AppCompatActivity {
         else if (referee.getQualification().getCouncil() == Council.IJB)
             radioButtonIBJ.setChecked(true);
 
-        String[] range = {"0", "1", "2", "3", "4"};
+        String[] range = {"1", "2", "3", "4"};
 
         Spinner spinner = (Spinner)findViewById(R.id.spinnerQualifEditRefereeProfile);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, range); //selected item will look like a spinner set from XML

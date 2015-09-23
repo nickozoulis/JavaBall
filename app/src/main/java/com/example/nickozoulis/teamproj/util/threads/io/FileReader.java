@@ -3,7 +3,7 @@ package com.example.nickozoulis.teamproj.util.threads.io;
 import android.os.Environment;
 import android.os.Handler;
 
-import com.example.nickozoulis.teamproj.MainActivity;
+import com.example.nickozoulis.teamproj.activities.MainActivity;
 import com.example.nickozoulis.teamproj.domain.Referee;
 import com.example.nickozoulis.teamproj.util.threads.handlers.UpdateRefereeCollection;
 

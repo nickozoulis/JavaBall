@@ -1,4 +1,4 @@
-package com.example.nickozoulis.teamproj;
+package com.example.nickozoulis.teamproj.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nickozoulis.teamproj.R;
 import com.example.nickozoulis.teamproj.domain.Referee;
 
 import java.util.ArrayList;

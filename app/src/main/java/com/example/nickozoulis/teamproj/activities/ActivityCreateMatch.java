@@ -1,6 +1,5 @@
-package com.example.nickozoulis.teamproj;
+package com.example.nickozoulis.teamproj.activities;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,20 +12,30 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.nickozoulis.teamproj.R;
 import com.example.nickozoulis.teamproj.adapters.ListAdapterReferee;
 import com.example.nickozoulis.teamproj.domain.Area;
+import com.example.nickozoulis.teamproj.domain.Referee;
+import com.example.nickozoulis.teamproj.util.algorithm.Allocation;
+import com.example.nickozoulis.teamproj.util.algorithm.AllocationAlgorithm;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class ActivityCreateMatch extends AppCompatActivity {
 
-    private String spinnerWeekSelection;
+    private int spinnerWeekSelection;
+    private int radioGroupLevelSelection = -1;
+    private Area radioGroupAreaSelection = null;
 
     private ListView listView;
     private ListAdapterReferee listAdapter;
 
     private Toast toast;
+
+    private Allocation alloc;
+    private Collection filteredCollection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +68,6 @@ public class ActivityCreateMatch extends AppCompatActivity {
         ((RadioGroup)findViewById(R.id.createMatchRadioGroupLevel)).setOnCheckedChangeListener(new MyRadioGroupLevelOnClickListener());
     }
 
-    private Collection softFilter(int weekNumber, int level, Area area) {
-
-    }
-
-    private Collection hardFilter(int weekNumber, int level, Area area) {
-
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -92,6 +93,12 @@ public class ActivityCreateMatch extends AppCompatActivity {
     }
 
     private void createMatchAndQuit() {
+        if (filteredCollection.size() < 2) {
+            showToast("Not enough referees for a match!");
+            return;
+        }
+
+
 
 
     }
@@ -115,9 +122,7 @@ public class ActivityCreateMatch extends AppCompatActivity {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-            spinnerWeekSelection = parent.getItemAtPosition(pos).toString();
-
-            refreshListView(MainActivity.getReferees());
+            spinnerWeekSelection = pos + 1;
         }
 
         @Override
@@ -133,15 +138,16 @@ public class ActivityCreateMatch extends AppCompatActivity {
 
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
-
             int selected = ((RadioGroup)findViewById(R.id.createMatchRadioGroupLevel)).getCheckedRadioButtonId();
 
             if (selected == R.id.createMatchRadioButtonJunior) {
-
+                radioGroupLevelSelection = 1;
             } else if (selected == R.id.createMatchRadioButtonSenior) {
-
+                radioGroupLevelSelection = 2;
             }
 
+            alloc = new AllocationAlgorithm(radioGroupLevelSelection ,radioGroupAreaSelection, MainActivity.getReferees());
+            filterAndRefresh();
         }
     }
 
@@ -152,18 +158,34 @@ public class ActivityCreateMatch extends AppCompatActivity {
 
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
-
             int selected = ((RadioGroup)findViewById(R.id.createMatchRadioGroupArea)).getCheckedRadioButtonId();
 
             if (selected == R.id.createMatchRadioButtonNorth) {
-
+                radioGroupAreaSelection = Area.NORTH;
             } else if (selected == R.id.createMatchRadioButtonCentral) {
-
+                radioGroupAreaSelection = Area.CENTRAL;
             } else if (selected == R.id.createMatchRadioButtonSouth) {
-
+                radioGroupAreaSelection = Area.SOUTH;
             }
 
+            alloc = new AllocationAlgorithm(radioGroupLevelSelection ,radioGroupAreaSelection, MainActivity.getReferees());
+            filterAndRefresh();
         }
     }
 
+    private void filterAndRefresh() {
+        //TODO: Make it run even if an option is not selected.
+        if (radioGroupLevelSelection == -1 || radioGroupAreaSelection == null) {
+            showToast("Pick a selection for area And level!");
+            return;
+        }
+
+        filteredCollection = alloc.filter();
+
+        if (filteredCollection != null) {
+            refreshListView(filteredCollection);
+        } else {
+            showToast("Not enough referees for a match with the specified options!");
+        }
+    }
 }

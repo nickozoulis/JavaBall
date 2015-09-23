@@ -7,5 +7,5 @@ import java.util.Collection;
  */
 public interface Allocation {
 
-    public Collection filterBySuitability();
+    public Collection filter();
 }

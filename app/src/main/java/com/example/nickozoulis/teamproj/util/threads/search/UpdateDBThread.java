@@ -1,7 +1,6 @@
 package com.example.nickozoulis.teamproj.util.threads.search;
 
-import com.example.nickozoulis.teamproj.MainActivity;
-import com.example.nickozoulis.teamproj.util.threads.search.SearchHelper;
+import com.example.nickozoulis.teamproj.activities.MainActivity;
 
 public class UpdateDBThread implements Runnable {
 	

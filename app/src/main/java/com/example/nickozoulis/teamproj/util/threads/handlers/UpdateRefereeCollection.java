@@ -1,6 +1,6 @@
 package com.example.nickozoulis.teamproj.util.threads.handlers;
 
-import com.example.nickozoulis.teamproj.MainActivity;
+import com.example.nickozoulis.teamproj.activities.MainActivity;
 
 import java.util.Collection;
 

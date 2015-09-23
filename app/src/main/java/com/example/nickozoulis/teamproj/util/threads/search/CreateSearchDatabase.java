@@ -2,7 +2,7 @@ package com.example.nickozoulis.teamproj.util.threads.search;
 
 import java.util.ArrayList;
 
-import com.example.nickozoulis.teamproj.MainActivity;
+import com.example.nickozoulis.teamproj.activities.MainActivity;
 import com.example.nickozoulis.teamproj.domain.Referee;
 
 import android.os.Handler;

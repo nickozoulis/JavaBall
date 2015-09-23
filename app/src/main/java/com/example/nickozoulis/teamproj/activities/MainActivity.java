@@ -1,4 +1,4 @@
-package com.example.nickozoulis.teamproj;
+package com.example.nickozoulis.teamproj.activities;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,6 +14,7 @@ import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import com.example.nickozoulis.teamproj.R;
 import com.example.nickozoulis.teamproj.adapters.ListAdapterReferee;
 import com.example.nickozoulis.teamproj.domain.Person;
 import com.example.nickozoulis.teamproj.domain.Referee;
@@ -33,15 +34,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public static final String REFEREEINFO = "REFEREEINFO";
     public static final int REQUEST_CODE = 1;
+
     private MainActivity mainActivity;
+    private Toast toast;
+
     private static Collection referees;
+    private static Collection matches;
+
     private ListView listView;
     private ListAdapterReferee listAdapter;
 
     private SearchView searchView;
     private SearchHelper mDbHelper;
-
-    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -285,6 +289,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void setReferees(Collection referees) {
         this.referees = referees;
         refreshListView(referees);
+    }
+
+    public static Collection getMatches() {
+        return matches;
+    }
+
+    public static void setMatches(Collection matches) {
+        MainActivity.matches = matches;
     }
 
     @Override
