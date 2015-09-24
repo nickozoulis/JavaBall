@@ -1,6 +1,8 @@
 package com.example.nickozoulis.teamproj.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -122,9 +124,37 @@ public class ActivityEditRefereeProfile extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.saveProfileRefereeButton) {
-            saveChangesAndQuit();
+            new AlertDialog.Builder(this)
+                    .setTitle("Save Referee")
+                    .setMessage("Are you sure you want to save this Referee?")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            saveChangesAndQuit();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
         } else if (id == R.id.deleteProfileRefereeButton) {
-            deleteProfileAndQuit();
+            new AlertDialog.Builder(this)
+                    .setTitle("Delete Referee")
+                    .setMessage("Are you sure you want to delete this Referee?")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            deleteProfileAndQuit();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
         }
 
         return super.onOptionsItemSelected(item);
