@@ -60,6 +60,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // Main Referee ListView
         // Set ListView reaction when an element is clicked.
         listView = (ListView)findViewById(R.id.refereesListView);
+        setListViewCustomOnClickListener(listView);
+
+        // Parses the RefereesIn file and initializes collection using thread to avoid UI crashing.
+        new Thread(new FileReader(this, new Handler())).start();
+    }
+
+    private void setListViewCustomOnClickListener(ListView listView) {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArrayList arrayList = (ArrayList<Referee>)referees;
@@ -69,9 +76,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 refereeProfileIntent.putExtra(REFEREEINFO, arrayList.get(position).toString());
                 startActivityForResult(refereeProfileIntent, MainActivity.REQUEST_CODE);
             }});
-
-        // Parses the RefereesIn file and initializes collection using thread to avoid UI crashing.
-        new Thread(new FileReader(this, new Handler())).start();
     }
 
     @Override
@@ -141,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         listAdapter = new ListAdapterReferee(this, R.layout.list_row, (List)referees);
         listView.setAdapter(listAdapter);
         listAdapter.notifyDataSetChanged();
+        setListViewCustomOnClickListener(listView);
     }
 
     private void initSearchUtil() {
@@ -333,10 +338,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == MainActivity.REQUEST_CODE && resultCode == RESULT_OK) {
-                refreshListViewOnCreate(getReferees());
+                refreshListView(getReferees());
         } else if (requestCode == MainActivity.REQUEST_CODE && resultCode < RESULT_OK) {
             showToast("Referee was succesfully deleted!");
-            // Refresh ListView
             refreshListView(getReferees());
         } else if (requestCode == MainActivity.REQUEST_CODE_MATCH && resultCode == RESULT_OK) {
             showToast("Match was succesfully saved!");
