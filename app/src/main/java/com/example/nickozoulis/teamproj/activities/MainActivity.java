@@ -90,9 +90,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.createReferee) {
-            // Start new Activity.
-            Intent refereeProfileIntent = new Intent(mainActivity, ActivityCreateReferee.class);
-            startActivityForResult(refereeProfileIntent, MainActivity.REQUEST_CODE);
+            if (MainActivity.getReferees().size() <= 12) {
+                // Start new Activity.
+                Intent refereeProfileIntent = new Intent(mainActivity, ActivityCreateReferee.class);
+                startActivityForResult(refereeProfileIntent, MainActivity.REQUEST_CODE);
+            } else {
+                showToast("Maximum Referee number is reached! [12]");
+            }
         } else if (id == R.id.createMatch) {
             // Start new Activity.
             Intent refereeProfileIntent = new Intent(mainActivity, ActivityCreateMatch.class);

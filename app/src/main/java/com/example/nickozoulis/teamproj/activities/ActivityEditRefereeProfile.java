@@ -185,6 +185,8 @@ public class ActivityEditRefereeProfile extends AppCompatActivity {
         saveVisitLocality();
 
         ((ArrayList)MainActivity.getReferees()).set(refereeIndex, referee);
+
+        showToast("Profile updated!");
     }
 
     private void saveVisitLocality() {
