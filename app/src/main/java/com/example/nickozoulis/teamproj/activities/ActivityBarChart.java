@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 import com.example.nickozoulis.teamproj.R;
 import com.example.nickozoulis.teamproj.domain.Referee;
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
@@ -43,6 +44,7 @@ public class ActivityBarChart extends AppCompatActivity {
 
         BarData data = new BarData(xValues, yValues);
         chart.setData(data);
+
         // Refresh
         chart.invalidate();
     }

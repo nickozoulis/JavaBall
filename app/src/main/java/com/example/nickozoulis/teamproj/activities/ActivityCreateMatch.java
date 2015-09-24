@@ -102,26 +102,33 @@ public class ActivityCreateMatch extends AppCompatActivity {
         }
 
         createMatch();
-
-        Intent resultIntent = new Intent();
-        setResult(Activity.RESULT_OK, resultIntent);
-        finish();
     }
 
     private void createMatch() {
-        //TODO: Check if week conflict
+        // If filters are not set, set the values to their more general one.
+        if (radioGroupLevelSelection == -1) radioGroupLevelSelection = 4;
+        if (radioGroupAreaSelection == null) radioGroupAreaSelection = Area.CENTRAL;
+
         Match m = new Match(spinnerWeekSelection, radioGroupLevelSelection, radioGroupAreaSelection);
-        // The to first referees are the most suitable, collection has been sorted in algorithm.
 
-        List suitableRefs = ((List)filteredCollection).subList(0,2);
-        m.setReferees(suitableRefs);
+        if (!MainActivity.getMatches().contains(m)) {
+            // The to first referees are the most suitable, collection has been sorted in algorithm.
+            List suitableRefs = ((List) filteredCollection).subList(0, 2);
+            m.setReferees(suitableRefs);
 
-        // Increment referees' allocated matches
-        for (Referee r : (List<Referee>)suitableRefs) {
-            r.setNumOfMatchAllocated(r.getNumOfMatchAllocated() + 1);
+            // Increment referees' allocated matches
+            for (Referee r : (List<Referee>) suitableRefs) {
+                r.setNumOfMatchAllocated(r.getNumOfMatchAllocated() + 1);
+            }
+
+            MainActivity.getMatches().add(m);
+
+            Intent resultIntent = new Intent();
+            setResult(Activity.RESULT_OK, resultIntent);
+            finish();
+        } else {
+            showToast("There is an other match scheduled for week " + spinnerWeekSelection + "!");
         }
-
-        MainActivity.getMatches().add(m);
     }
 
     public void showToast(String text) {
@@ -201,12 +208,6 @@ public class ActivityCreateMatch extends AppCompatActivity {
     }
 
     private void filterAndRefresh(int level, Area area) {
-        //TODO: Make it run even if an option is not selected.
-        if (radioGroupLevelSelection == -1 || radioGroupAreaSelection == null) {
-            showToast("Pick a selection for area And level!");
-            return;
-        }
-
         alloc.setLevel(level);
         alloc.setArea(area);
 

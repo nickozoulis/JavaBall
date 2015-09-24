@@ -17,8 +17,8 @@ import java.util.Set;
  */
 public class AllocationAlgorithm implements Allocation {
 
-    private int level;
-    private Area area;
+    private int level = -1;
+    private Area area = null;
     private Collection collection;
 
 
@@ -26,6 +26,7 @@ public class AllocationAlgorithm implements Allocation {
 
     @Override
     public Collection filter() {
+        //TODO: For bigger collections, threaded approach should be followed to avoid UI crash.
         List list = new ArrayList<>(filterBySuitability(collection));
 
         // Sort suitable referees based on a custom comparator.
@@ -37,8 +38,11 @@ public class AllocationAlgorithm implements Allocation {
     public Set filterBySuitability(Collection collection) {
         Set<Referee> set = new HashSet<>();
 
-        set.addAll(filterByLevel(new HashSet(collection)));
+        // If filters are not set, set the values to their more general one.
+        if (level == -1) setLevel(4);
+        if (area == null) setArea(Area.CENTRAL);
 
+        set.addAll(filterByLevel(new HashSet(collection)));
         set.addAll(filterByHomeArea(set));
         set.addAll(filterByAdjacentAndVisitArea(set));
         set.addAll(filterByNonAdjacentAndVisitArea(set));
