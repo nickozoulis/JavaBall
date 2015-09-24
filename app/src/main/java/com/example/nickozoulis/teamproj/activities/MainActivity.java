@@ -97,6 +97,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             // Start new Activity.
             Intent refereeProfileIntent = new Intent(mainActivity, ActivityCreateMatch.class);
             startActivityForResult(refereeProfileIntent, MainActivity.REQUEST_CODE_MATCH);
+        } else if (id == R.id.viewBarChart) {
+            // Start new Activity.
+            Intent refereeProfileIntent = new Intent(mainActivity, ActivityBarChart.class);
+            startActivityForResult(refereeProfileIntent, MainActivity.REQUEST_CODE);
         } else if (id == R.id.exit) {
             saveAndQuit();
         }

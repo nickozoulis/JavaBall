@@ -34,7 +34,10 @@
             android:name=".activities.ActivityCreateMatch"
             android:label="@string/title_activity_activity_create_match" >
         </activity>
-
+        <activity
+            android:name=".activities.ActivityBarChart"
+            android:label="@string/title_activity_activity_bar_chart" >
+        </activity>
     </application>
 
 </manifest>
