@@ -2,6 +2,9 @@ package com.example.nickozoulis.teamproj.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -44,15 +47,19 @@ public class ActivityViewRefereeProfile extends AppCompatActivity {
         TextView textViewQualification = (TextView)findViewById(R.id.activity_referee_profile_qualification_textview);
         TextView textViewHomeLocality = (TextView)findViewById(R.id.activity_referee_profile_homeLocality_textview);
         TextView textViewVisitLocality = (TextView)findViewById(R.id.activity_referee_profile_visitLocality_textview);
+        TextView textViewNumOfAllocations = (TextView)findViewById(R.id.activity_referee_profile_numOfAllocatedMatches_textview);
 
         textViewProfileID.setText(referee.getPerson().getID());
         textViewFullName.setText(referee.getPerson().getFullName());
         textViewQualification.setText(referee.getQualification().toString());
         textViewHomeLocality.setText(referee.getLocality().homeToString());
-        textViewVisitLocality.setText(referee.getLocality().visitToString());
+        textViewVisitLocality.setText(referee.getLocality().visitToStringInWords());
+        textViewNumOfAllocations.setText(referee.getNumOfMatchAllocated()+"");
 
         RatingBar ratingBar = (RatingBar)findViewById(R.id.refereeProfileRatingBar);
         ratingBar.setRating(referee.getQualification().getLevel());
+        Drawable progress = ratingBar.getProgressDrawable();
+        DrawableCompat.setTint(progress, Color.argb(255, 255, 215, 0)); // Gold
     }
 
 

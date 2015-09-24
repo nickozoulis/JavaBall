@@ -97,6 +97,19 @@ public class Locality {
         return s;
     }
 
+    public String visitToStringInWords() {
+        String s = "[";
+
+        if (getVisit().contains(Area.NORTH))
+            s += " North ";
+        if (getVisit().contains(Area.CENTRAL))
+            s += " Central ";
+        if (getVisit().contains(Area.SOUTH))
+            s += " South ";
+
+        return s + "]";
+    }
+
     public static boolean isAreaAdjacent(Area home, Area area) {
         switch (area) {
             case NORTH:

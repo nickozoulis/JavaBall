@@ -32,12 +32,14 @@
     <string name="availableReferees">Available Referees</string>
     <string name="type_a_name">Type a name</string>
     <string name="viewBarChart">Bar Chart</string>
+    <string name="refereeID">Referee ID</string>
+    <string name="numOfAllocatedMatches">Allocated Matches</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_activity_edit_referee_profile">Edit Referee Profile</string>
     <string name="title_activity_activity_create_referee">Create Referee</string>
     <string name="title_activity_activity_create_match">Create Match</string>
-    <string name="title_activity_activity_bar_chart">Allocation BarChart</string>
+    <string name="title_activity_activity_bar_chart">Match Allocations</string>
 
 
 </resources>
