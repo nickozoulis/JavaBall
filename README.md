@@ -1,7 +1,7 @@
 # JavaBall
 JavaBall Match Referee Allocation
 
-A project assigned during the first week of my master degree in order to get our programming skills assessed. We had 4 days to develop an application (I managed to complete it in 3 and a half) using a platform of our choice. Basically it is an app that finds and assigns suitable referees to to javaball matches. The input of the app is in specific format, and must be located in sd card/javaball/, in a file named 'RefereesIn.txt'.
+A project assigned during the first week of my master degree in order to get our programming skills assessed. We had 4 days to develop an application (I managed to complete it in 3 and a half) using a platform of our choice. Basically it is an app that finds and assigns suitable referees to to javaball matches. The input of the app is in specific format, and must be located in sd card/javaball/, in a file named 'RefereesIn.txt'. 
 
 <i>Example of RefereesIn.txt</i>
 
@@ -12,3 +12,6 @@ A project assigned during the first week of my master degree in order to get our
 <p>KL1 Kenneth Lorrimer IJB2 6 South YYY</p>
 <p>KL2 Kenneth Lindsay NJB3 12 Central YYY</p>
 <p>TT1 Tim Toms IJB1 Central NYN</p>
+
+
+PS: Sory, but no time for full documentation if 4 days :D
