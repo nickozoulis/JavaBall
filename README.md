@@ -14,4 +14,4 @@ A project assigned during the first week of my master degree in order to get our
 <p>TT1 Tim Toms IJB1 Central NYN</p>
 
 
-PS: Sory, but no time for full documentation if 4 days :D
+PS: Sorry, but no time for full documentation in 4 days :D
